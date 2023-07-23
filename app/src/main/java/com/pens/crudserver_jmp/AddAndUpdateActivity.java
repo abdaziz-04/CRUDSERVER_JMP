@@ -209,16 +209,12 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_delete:
-                showAlertDialog(ALERT_DIALOG_DELETE);
-                break;
-
-            case android.R.id.home:
-                showAlertDialog(ALERT_DIALOG_CLOSE);
-                break;
-
+        if (item.getItemId() == R.id.action_delete) {
+            showAlertDialog(ALERT_DIALOG_DELETE);
+        } else if (item.getItemId() == android.R.id.home) {
+            showAlertDialog(ALERT_DIALOG_CLOSE);
         }
+
         return super.onOptionsItemSelected(item);
     }
 
