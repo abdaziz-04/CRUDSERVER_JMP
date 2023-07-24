@@ -17,11 +17,11 @@ public class ItemHolder extends RecyclerView.ViewHolder {
     public ItemHolder(@NonNull View itemView) {
         super(itemView);
 
-        name =itemView.findViewById(R.id.tv_name);
-        brand =itemView.findViewById(R.id.tv_brand);
+        name = itemView.findViewById(R.id.tv_name);
+        brand = itemView.findViewById(R.id.tv_brand);
 
-        price =itemView.findViewById(R.id.tv_price);
-        cView =itemView.findViewById(R.id.cv_item);
+        price = itemView.findViewById(R.id.tv_price);
+        cView = itemView.findViewById(R.id.cv_item);
 
     }
 }
