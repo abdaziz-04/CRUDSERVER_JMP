@@ -20,7 +20,7 @@ public interface APIService {
             @Field("price") Integer price
     );
 
-    //Method untuk update data : http://vsga.zulhaydarakbar.com/tokenAKBAR/item/{id}/update
+    //Method untuk update data : http://vsga.zulhaydarakbar.com/{token}/item/{id}/update
     @POST("/{token}/item/{id}/update")
     @FormUrlEncoded
     Call<Result> update(
@@ -32,20 +32,20 @@ public interface APIService {
 
     );
 
-    //getall data : http://vsga.zulhaydarakbar.com/tokenAKBAR/item/
+    //getall data : http://vsga.zulhaydarakbar.com/{token}/item/
     @GET("/{token}/item")
     Call<Result> getAll(
             @Path("token") String token
     );
 
-    //get specific item : http://vsga.zulhaydarakbar.com/tokenAKBAR/item/{id}
+    //get specific item : http://vsga.zulhaydarakbar.com/{token}/item/{id}
     @GET("/{token}/item/{id}")
     Call<Result> getItem(
             @Path("token") String token,
             @Path("id") int id
     );
 
-    //hapus data : http://vsga.zulhaydarakbar.com/tokenAKBAR/item/{id}/delete
+    //hapus data : http://vsga.zulhaydarakbar.com/{token}/item/{id}/delete
     @GET("/{token}/item/{id}/delete")
     Call<Result> delete(
             @Path("token") String token,
