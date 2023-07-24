@@ -18,8 +18,6 @@ public class Result implements Parcelable {
     @Nullable
     private Item item;
 
-
-
     public int getCode() {
         return code;
     }

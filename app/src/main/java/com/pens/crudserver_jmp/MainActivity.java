@@ -87,12 +87,11 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl(Constants.URL_API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        Log.d("Percobaan","loadAll : ");
+        Log.d("Percobaan", "loadAll : ");
 
         APIService apiService = retrofit.create(APIService.class);
 
         final Call<Result> result = apiService.getAll(Constants.TOKEN);
-
 
 
         result.enqueue(new Callback<Result>() {
@@ -112,14 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 if (items != null) {
                     itemAdapter.setListItems(items);
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                 progressDialog.dismiss();
-                Log.d("Percobaan","loadAll onFailure: ");
+                Log.d("Percobaan", "loadAll onFailure: ");
 
             }
         });

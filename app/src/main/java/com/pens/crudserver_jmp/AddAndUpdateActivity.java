@@ -111,16 +111,11 @@ public class AddAndUpdateActivity extends AppCompatActivity {
         String brand = edBrand.getText().toString().trim();
         Integer price = Integer.parseInt(edPrice.getText().toString().trim());
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.URL_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.URL_API).addConverterFactory(GsonConverterFactory.create()).build();
         APIService apiService = retrofit.create(APIService.class);
 
-        final Call<Result> result = apiService.create(
-                Constants.TOKEN, name,
-                brand, price);
-        Log.d("Percobaan","link : "+retrofit.baseUrl());
+        final Call<Result> result = apiService.create(Constants.TOKEN, name, brand, price);
+        Log.d("Percobaan", "link : " + retrofit.baseUrl());
 
         result.enqueue(new Callback<Result>() {
             @Override
@@ -129,8 +124,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
                 Result jsonResult = response.body();
 
-                Toast.makeText(AddAndUpdateActivity.this,
-                        jsonResult.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddAndUpdateActivity.this, jsonResult.getMessage(), Toast.LENGTH_LONG).show();
 
                 finish();
             }
@@ -138,18 +132,16 @@ public class AddAndUpdateActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                 progressDialog.dismiss();
-                Log.d("Percobaan","response : "+ call.toString());
+                Log.d("Percobaan", "response : " + call.toString());
 
-                Toast.makeText(AddAndUpdateActivity.this,
-                        "Failed", Toast.LENGTH_LONG).show();
+                Toast.makeText(AddAndUpdateActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
                 if (t instanceof IOException) {
                     Toast.makeText(AddAndUpdateActivity.this, "this is an actual network failure :( inform the user and possibly retry", Toast.LENGTH_SHORT).show();
-                    Log.d("Percobaan","IOException : "+ call.toString());
-                }
-                else {
+                    Log.d("Percobaan", "IOException : " + call.toString());
+                } else {
                     Toast.makeText(AddAndUpdateActivity.this, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show();
-                    Log.d("Percobaan","else : "+ call.toString());
+                    Log.d("Percobaan", "else : " + call.toString());
                 }
 
             }
@@ -167,15 +159,11 @@ public class AddAndUpdateActivity extends AppCompatActivity {
         String brand = edBrand.getText().toString().trim();
         Integer price = Integer.parseInt(edPrice.getText().toString().trim());
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.URL_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.URL_API).addConverterFactory(GsonConverterFactory.create()).build();
 
         APIService apiService = retrofit.create(APIService.class);
 
-        final Call<Result> result = apiService.update(Constants.TOKEN,
-                item.getId(), name, brand, price);
+        final Call<Result> result = apiService.update(Constants.TOKEN, item.getId(), name, brand, price);
 
         result.enqueue(new Callback<Result>() {
             @Override
@@ -184,8 +172,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
                 Result jsonResult = response.body();
 
-                Toast.makeText(AddAndUpdateActivity.this,
-                        jsonResult.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddAndUpdateActivity.this, jsonResult.getMessage(), Toast.LENGTH_LONG).show();
 
                 finish();
             }
@@ -231,29 +218,25 @@ public class AddAndUpdateActivity extends AppCompatActivity {
             dialogMessage = "Are you sure to delete this item ?";
         }
 
-        AlertDialog.Builder alertDialogBuilder =
-                new AlertDialog.Builder(this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
 
         alertDialogBuilder.setTitle(dialogTitle);
-        alertDialogBuilder.setMessage(dialogMessage)
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (isDialogClose) {
-                            finish();
-                        } else {
-                            deleteItem(item.getId());
-                        }
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
+        alertDialogBuilder.setMessage(dialogMessage).setCancelable(false).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (isDialogClose) {
+                    finish();
+                } else {
+                    deleteItem(item.getId());
+                }
+            }
+        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
@@ -271,10 +254,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
         progressDialog.setMessage("Please wait ...");
         progressDialog.show();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.URL_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.URL_API).addConverterFactory(GsonConverterFactory.create()).build();
 
         APIService apiService = retrofit.create(APIService.class);
 
@@ -287,8 +267,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
                 Result jsonResult = response.body();
 
-                Toast.makeText(AddAndUpdateActivity.this,
-                        jsonResult.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddAndUpdateActivity.this, jsonResult.getMessage(), Toast.LENGTH_LONG).show();
 
                 finish();
             }
@@ -302,16 +281,14 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
     }
 
-    public void checkConnection(){
+    public void checkConnection() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         if (isConnected) {
-            Toast.makeText(AddAndUpdateActivity.this,
-                    "connect", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddAndUpdateActivity.this, "connect", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(AddAndUpdateActivity.this,
-                    "disconnect", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddAndUpdateActivity.this, "disconnect", Toast.LENGTH_LONG).show();
         }
     }
 }

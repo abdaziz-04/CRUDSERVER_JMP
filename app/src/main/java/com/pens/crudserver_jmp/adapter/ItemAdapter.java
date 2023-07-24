@@ -53,8 +53,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 intent.putExtra("position", position);
                 intent.putExtra("item", listItems.get(position));
                 context.startActivity(intent);
-
-
             }
         });
     }
