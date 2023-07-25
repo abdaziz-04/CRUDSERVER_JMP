@@ -1,8 +1,5 @@
 package com.pens.crudserver_jmp;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.pens.crudserver_jmp.model.Item;
 import com.pens.crudserver_jmp.model.Result;
 import com.pens.crudserver_jmp.service.APIService;
@@ -30,19 +30,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddAndUpdateActivity extends AppCompatActivity {
-
-
-    EditText edName, edBrand, edPrice;
-    Button btnSubmit;
-
-
-    boolean isEdit = false;
-
-    Item item;
-    int position;
-
     private final int ALERT_DIALOG_CLOSE = 20;
     private final int ALERT_DIALOG_DELETE = 10;
+    EditText edName, edBrand, edPrice;
+    Button btnSubmit;
+    boolean isEdit = false;
+    Item item;
+    int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +92,6 @@ public class AddAndUpdateActivity extends AppCompatActivity {
         }
         checkConnection();
         btnSubmit.setText(btnTitle);
-
-
     }
 
     private void addNewData() {
@@ -132,16 +124,16 @@ public class AddAndUpdateActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<Result> call, Throwable t) {
                 progressDialog.dismiss();
-                Log.d("Percobaan", "response : " + call.toString());
+                Log.d("Percobaan", "response : " + call);
 
                 Toast.makeText(AddAndUpdateActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
                 if (t instanceof IOException) {
                     Toast.makeText(AddAndUpdateActivity.this, "this is an actual network failure :( inform the user and possibly retry", Toast.LENGTH_SHORT).show();
-                    Log.d("Percobaan", "IOException : " + call.toString());
+                    Log.d("Percobaan", "IOException : " + call);
                 } else {
                     Toast.makeText(AddAndUpdateActivity.this, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show();
-                    Log.d("Percobaan", "else : " + call.toString());
+                    Log.d("Percobaan", "else : " + call);
                 }
 
             }
@@ -240,7 +232,6 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
-
 
     }
 

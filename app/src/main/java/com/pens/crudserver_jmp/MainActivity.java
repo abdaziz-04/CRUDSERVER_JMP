@@ -1,9 +1,5 @@
 package com.pens.crudserver_jmp;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +9,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.pens.crudserver_jmp.adapter.ItemAdapter;
@@ -31,10 +31,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    ArrayList<Item> items = new ArrayList<Item>();
     private RecyclerView rvItem;
     private FloatingActionButton fabAdd;
-
-    ArrayList<Item> items = new ArrayList<Item>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
