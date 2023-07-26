@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,16 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
         fabAdd = findViewById(R.id.fab_add);
 
-        fabAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(
-                        MainActivity.this,
-                        AddAndUpdateActivity.class);
+        fabAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    AddAndUpdateActivity.class);
 
-                startActivity(intent);
+            startActivity(intent);
 
-            }
         });
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         result.enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
+            public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
                 progressDialog.dismiss();
                 Log.d("Percobaan body : ", response.toString());
 
@@ -113,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Result> call, Throwable t) {
+            public void onFailure(@NonNull Call<Result> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Log.d("Percobaan", "loadAll onFailure: ");
 

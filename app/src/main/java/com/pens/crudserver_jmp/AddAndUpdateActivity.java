@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,7 +32,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AddAndUpdateActivity extends AppCompatActivity {
     private final int ALERT_DIALOG_CLOSE = 20;
-    private final int ALERT_DIALOG_DELETE = 10;
     EditText edName, edBrand, edPrice;
     Button btnSubmit;
     boolean isEdit = false;
@@ -50,14 +50,11 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
         btnSubmit = findViewById(R.id.btn_submit);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isEdit) {
-                    editData();
-                } else {
-                    addNewData();
-                }
+        btnSubmit.setOnClickListener(view -> {
+            if (isEdit) {
+                editData();
+            } else {
+                addNewData();
             }
         });
 
@@ -111,7 +108,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
 
         result.enqueue(new Callback<Result>() {
             @Override
-            public void onResponse(Call<Result> call, Response<Result> response) {
+            public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
                 progressDialog.dismiss();
 
                 Result jsonResult = response.body();
@@ -122,7 +119,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Result> call, Throwable t) {
+            public void onFailure(@NonNull Call<Result> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
                 Log.d("Percobaan", "response : " + call);
 
@@ -189,6 +186,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_delete) {
+            int ALERT_DIALOG_DELETE = 10;
             showAlertDialog(ALERT_DIALOG_DELETE);
         } else if (item.getItemId() == android.R.id.home) {
             showAlertDialog(ALERT_DIALOG_CLOSE);
@@ -223,12 +221,7 @@ public class AddAndUpdateActivity extends AppCompatActivity {
                     deleteItem(item.getId());
                 }
             }
-        }).setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
+        }).setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
