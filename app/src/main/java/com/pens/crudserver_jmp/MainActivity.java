@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 .baseUrl(Constants.URL_API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        Log.d("Percobaan", "loadAll : ");
 
         APIService apiService = retrofit.create(APIService.class);
 
@@ -95,16 +94,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
                 progressDialog.dismiss();
-                Log.d("Percobaan body : ", response.toString());
-
                 Result jsonResult = response.body();
-
                 items = jsonResult.getItems();
-
                 ItemAdapter itemAdapter = new ItemAdapter(MainActivity.this);
-
                 rvItem.setAdapter(itemAdapter);
-
                 if (items != null) {
                     itemAdapter.setListItems(items);
                 }
@@ -113,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<Result> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
-                Log.d("Percobaan", "loadAll onFailure: ");
-
             }
         });
 

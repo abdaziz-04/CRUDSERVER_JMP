@@ -104,8 +104,6 @@ public class AddAndUpdateActivity extends AppCompatActivity {
         APIService apiService = retrofit.create(APIService.class);
 
         final Call<Result> result = apiService.create(Constants.TOKEN, name, brand, price);
-        Log.d("Percobaan", "link : " + retrofit.baseUrl());
-
         result.enqueue(new Callback<Result>() {
             @Override
             public void onResponse(@NonNull Call<Result> call, @NonNull Response<Result> response) {
@@ -121,16 +119,12 @@ public class AddAndUpdateActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<Result> call, @NonNull Throwable t) {
                 progressDialog.dismiss();
-                Log.d("Percobaan", "response : " + call);
-
                 Toast.makeText(AddAndUpdateActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
                 if (t instanceof IOException) {
                     Toast.makeText(AddAndUpdateActivity.this, "this is an actual network failure :( inform the user and possibly retry", Toast.LENGTH_SHORT).show();
-                    Log.d("Percobaan", "IOException : " + call);
                 } else {
                     Toast.makeText(AddAndUpdateActivity.this, "conversion issue! big problems :(", Toast.LENGTH_SHORT).show();
-                    Log.d("Percobaan", "else : " + call);
                 }
 
             }
