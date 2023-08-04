@@ -39,7 +39,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ItemAdapter.ItemViewHolder holder,final int position) {
+    public void onBindViewHolder(@NonNull final ItemAdapter.ItemViewHolder holder, final int position) {
 
         holder.tvName.setText(listItems.get(position).getName());
         holder.tvBrand.setText(listItems.get(position).getBrand());

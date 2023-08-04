@@ -5,10 +5,35 @@ import android.os.Parcelable;
 
 public class Item implements Parcelable {
 
+    public static final Creator<Item> CREATOR = new Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel source) {
+            return new Item(source);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
     private int id;
     private String name;
     private String brand;
     private Integer price;
+
+    public Item(int id, String name, String brand, Integer price) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+    }
+
+    protected Item(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.brand = in.readString();
+        this.price = (Integer) in.readValue(Integer.class.getClassLoader());
+    }
 
     @Override
     public String toString() {
@@ -18,13 +43,6 @@ public class Item implements Parcelable {
                 ", brand='" + brand + '\'' +
                 ", price=" + price +
                 '}';
-    }
-
-    public Item(int id, String name, String brand, Integer price) {
-        this.id = id;
-        this.name = name;
-        this.brand = brand;
-        this.price = price;
     }
 
     public int getId() {
@@ -71,23 +89,4 @@ public class Item implements Parcelable {
         dest.writeString(this.brand);
         dest.writeValue(this.price);
     }
-
-    protected Item(Parcel in) {
-        this.id = in.readInt();
-        this.name = in.readString();
-        this.brand = in.readString();
-        this.price = (Integer) in.readValue(Integer.class.getClassLoader());
-    }
-
-    public static final Creator<Item> CREATOR = new Creator<Item>() {
-        @Override
-        public Item createFromParcel(Parcel source) {
-            return new Item(source);
-        }
-
-        @Override
-        public Item[] newArray(int size) {
-            return new Item[size];
-        }
-    };
 }

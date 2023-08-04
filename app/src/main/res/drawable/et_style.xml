@@ -11,8 +11,8 @@
     </item>
     <!-- Item untuk shadow -->
     <item
-        android:right="4px"
-        android:bottom="4px">
+        android:bottom="4px"
+        android:right="4px">
         <shape android:shape="rectangle">
             <solid android:color="#33000000"></solid> <!-- Warna bayangan, #33 merupakan transparansi (hex 33 adalah sekitar 20%) -->
             <corners android:radius="6px" />
